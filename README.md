@@ -5,4 +5,4 @@ Serial Artent Brige
 
 ## Parameters
 
-`[java -jar faderwing.jar [ip] [Serial Port]`
+`java -jar faderwing.jar [ip] [Serial Port]`

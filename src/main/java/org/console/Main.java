@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) throws UnknownHostException {
         System.out.println("Starting!");
-        
+
         //Creating Channels
         for (int i = 0; i < 20; i++){
             Channel channelNew = new  Channel(i,0);

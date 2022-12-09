@@ -3,7 +3,6 @@ package org.console.artnet;
 import ch.bildspur.artnet.ArtNetClient;
 import org.console.Main;
 
-import java.net.InetAddress;
 import java.util.Arrays;
 
 public class SendArtNet {
@@ -11,25 +10,30 @@ public class SendArtNet {
     private static final byte[] dmxData = new byte[512];
     private static ArtNetClient artNetClient;
 
-    public static void createArtNetController(InetAddress address) {
+    public static void createArtNetController() {
         artNetClient = new ArtNetClient();
-        artNetClient.start(address);
+        artNetClient.start();
     }
 
     public static void sendData() {
         for (int i = 0; i < Main.getChannelList().size(); i++){
             dmxData[i] = (byte) Main.getChannelList().get(i).getValue();
         }
+        //dmxData[0] = 111;
         sendArtNetData(dmxData);
         Arrays.fill(dmxData, (byte) 0);
     }
 
     private static void sendArtNetData(byte[] data) {
-        artNetClient.broadcastDmx(0, 1, data);
+        if(Main.isBroadcast()){
+            artNetClient.broadcastDmx(Main.getSubnet(), Main.getUniverse(), data);
+        }else {
+            artNetClient.unicastDmx(Main.getUnicastAddress(), Main.getSubnet(), Main.getUniverse(), data);
+        }
     }
 
-    public static void tick(InetAddress address) {
-        createArtNetController(address);
+    public static void tick() {
+        createArtNetController();
         Runnable runnable = () -> {
             while (Thread.currentThread().isAlive()) {
                 sendData();

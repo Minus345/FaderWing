@@ -22,7 +22,7 @@ public class Main {
         System.out.println("Starting!");
 
         //Creating Channels
-        channelCount = 20;
+        channelCount = 4;
         for (int i = 0; i < channelCount; i++){
             Channel channelNew = new  Channel(i,0);
             channelList.add(channelNew);

@@ -12,7 +12,7 @@ public class SendArtNet {
 
     public static void createArtNetController() {
         artNetClient = new ArtNetClient();
-        artNetClient.start();
+        artNetClient.start("192.168.178.190");
     }
 
     public static void sendData() {

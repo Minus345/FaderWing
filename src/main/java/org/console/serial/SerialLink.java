@@ -44,6 +44,7 @@ public class SerialLink {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            //System.out.println(build);
         }
     }
 

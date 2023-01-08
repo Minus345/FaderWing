@@ -18,11 +18,15 @@ public class Main {
     private static boolean broadcast;
     private static InetAddress unicastAddress;
 
+    private static String ipAddress;
+
     public static void main(String[] args) throws IOException, InterruptedException {
         System.out.println("Starting!");
 
+        ipAddress = args[4];
+
         //Creating Channels
-        channelCount = 4;
+        channelCount = 20;
         for (int i = 0; i < channelCount; i++){
             Channel channelNew = new  Channel(i,0);
             channelList.add(channelNew);
@@ -79,5 +83,9 @@ public class Main {
 
     public static InetAddress getUnicastAddress() {
         return unicastAddress;
+    }
+
+    public static String getIpAddress() {
+        return ipAddress;
     }
 }

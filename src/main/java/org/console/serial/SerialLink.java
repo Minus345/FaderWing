@@ -50,11 +50,12 @@ public class SerialLink {
 
     private static void changeDmxSerialInput(String s, SerialPort port) {
         String[] split = s.split("\\|");
-        for (int i = 0; i < split.length; i++) {
-            Channel channel = Main.getChannelList().get(i);
-            channel.setValue(Integer.parseInt(split[i]));
-        }
         //System.out.println(s);
+        for (int i = 0; i < Main.getChannelCount(); i++) {
+            Channel channel = Main.getChannelList().get(i);
+            int value = Integer.parseInt(split[i]);
+            channel.setValue(value);
+        }
     }
 
     private static void writeBytesToArduino(SerialPort port) {

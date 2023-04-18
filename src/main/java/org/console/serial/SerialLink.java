@@ -8,16 +8,22 @@ import java.io.InputStream;
 
 public class SerialLink {
     private static String build;
+    private static Thread serialThread;
+
+    private static SerialPort[] comPorts;
+    private static boolean running;
 
     public static void run(int port) {
+        running = true;
         Runnable runnable = () -> action(port);
         Thread thread = new Thread(runnable);
         thread.start();
+        serialThread = thread;
     }
 
     private static void action(int port) {
         System.out.println("List COM ports");
-        SerialPort[] comPorts = SerialPort.getCommPorts();
+        comPorts = SerialPort.getCommPorts();
         for (int i = 0; i < comPorts.length; i++)
             System.out.println("comPorts[" + i + "] = " + comPorts[i].getDescriptivePortName());
         comPorts[port].openPort();
@@ -26,7 +32,7 @@ public class SerialLink {
         comPorts[port].setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
         InputStream in = comPorts[port].getInputStream();
         StringBuilder stringBuilder = new StringBuilder();
-        while (true) {
+        while (running) {
             try {
                 stringBuilder.append((char) in.read());
                 build = stringBuilder.toString();
@@ -38,7 +44,6 @@ public class SerialLink {
                         changeDmxSerialInput(build1, comPorts[port]);
                     } catch (Exception ignored) {
                     }
-
                     stringBuilder = new StringBuilder();
                 }
             } catch (Exception e) {
@@ -72,4 +77,11 @@ public class SerialLink {
         System.out.println("bytes: " + build);
         port.writeBytes(buildBytes, buildBytes.length);
     }
+
+    public static void stop(){
+        running = false;
+        comPorts[Main.getSerialPort()].closePort();
+        serialThread = null;
+    }
+
 }

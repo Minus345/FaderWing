@@ -5,7 +5,6 @@ import org.console.serial.SerialLink;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -17,6 +16,7 @@ public class Main {
     private static int universe;
     private static boolean broadcast;
     private static InetAddress unicastAddress;
+    private static int serialport;
 
     private static String ipAddress;
 
@@ -51,8 +51,8 @@ public class Main {
         SendArtNet.tick(); //192.168.178.131
 
         //Starting Serial Com
-        int port = Integer.parseInt(args[0]);
-        SerialLink.run(port);
+        serialport = Integer.parseInt(args[0]);
+        SerialLink.run(serialport);
 
         Thread.sleep(100);
 
@@ -87,5 +87,9 @@ public class Main {
 
     public static String getIpAddress() {
         return ipAddress;
+    }
+
+    public static int getSerialPort() {
+        return serialport;
     }
 }

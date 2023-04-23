@@ -2,10 +2,6 @@ package org.console;
 
 import org.console.artnet.SendArtNet;
 import org.console.serial.SerialLink;
-import org.console.FaderWindow;
-
-import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;

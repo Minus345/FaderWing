@@ -20,6 +20,13 @@ public class SendArtNet {
             dmxData[i] = (byte) Main.getChannelList().get(i).getValue();
         }
         //dmxData[0] = 111;
+        if(Main.isDmxJoker()){
+            for (int j = 0; j < dmxData.length; j++){
+                int channel = Byte.toUnsignedInt(dmxData[j]);
+                channel = channel / 2;
+                dmxData[j] = (byte) channel;
+            }
+        }
         sendArtNetData(dmxData);
         Arrays.fill(dmxData, (byte) 0);
     }

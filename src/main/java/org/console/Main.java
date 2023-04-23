@@ -2,7 +2,10 @@ package org.console;
 
 import org.console.artnet.SendArtNet;
 import org.console.serial.SerialLink;
+import org.console.FaderWindow;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -17,13 +20,25 @@ public class Main {
     private static boolean broadcast;
     private static InetAddress unicastAddress;
     private static int serialport;
+    private static boolean dmxJoker;
+
+    private static int layer;
+    private static boolean changingLayer;
 
     private static String ipAddress;
+    private static FaderWindow faderWindow;
 
     public static void main(String[] args) throws IOException, InterruptedException {
         System.out.println("Starting!");
+        //dmxJoker = true;
 
         ipAddress = args[4];
+
+        faderWindow = new FaderWindow();
+        faderWindow.setTitle("Fader Wing");
+        faderWindow.pack();
+        faderWindow.setLocationRelativeTo(null);
+        faderWindow.setVisible(true);
 
         //Creating Channels
         channelCount = 20;
@@ -91,5 +106,37 @@ public class Main {
 
     public static int getSerialPort() {
         return serialport;
+    }
+
+    public static boolean isDmxJoker() {
+        return dmxJoker;
+    }
+
+    public static void setDmxJoker(boolean dmxJoker) {
+        Main.dmxJoker = dmxJoker;
+    }
+
+    public static int getLayer() {
+        return layer;
+    }
+
+    public static void setLayer(int layer) {
+        Main.layer = layer;
+    }
+
+    public static boolean isChangingLayer() {
+        return changingLayer;
+    }
+
+    public static void setChangingLayer(boolean changingLayer) {
+        Main.changingLayer = changingLayer;
+    }
+
+    public static FaderWindow getFaderWindow() {
+        return faderWindow;
+    }
+
+    public static void setFaderWindow(FaderWindow faderWindow) {
+        Main.faderWindow = faderWindow;
     }
 }

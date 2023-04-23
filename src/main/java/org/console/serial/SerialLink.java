@@ -9,7 +9,6 @@ import java.io.InputStream;
 public class SerialLink {
     private static String build;
     private static Thread serialThread;
-
     private static SerialPort[] comPorts;
     private static boolean running;
 
@@ -44,7 +43,23 @@ public class SerialLink {
                         changeDmxSerialInput(build1, comPorts[port]);
                     } catch (Exception ignored) {
                     }
+                    String layer = build1.substring(build1.length() - 1);
+                    if (layer.equals("t") || layer.equals("f")){
+                        if(layer.equals("t")){
+                            Main.setChangingLayer(true);
+                            Main.getFaderWindow().setPannelColour(true);
+                            //System.out.println("Changing starting");
+                        }else{
+                            Main.setChangingLayer(false);
+                            Main.getFaderWindow().setPannelColour(false);
+                            //System.out.println("Changing stopp");
+                        }
+                    }else {
+                        Main.setLayer(Integer.parseInt(layer));
+                        Main.getFaderWindow().setLayer(layer);
+                    }
                     stringBuilder = new StringBuilder();
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -78,7 +93,7 @@ public class SerialLink {
         port.writeBytes(buildBytes, buildBytes.length);
     }
 
-    public static void stop(){
+    public static void stop() {
         running = false;
         comPorts[Main.getSerialPort()].closePort();
         serialThread = null;

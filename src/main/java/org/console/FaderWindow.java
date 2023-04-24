@@ -11,16 +11,18 @@ public class FaderWindow extends JFrame {
     private JLabel Lable4;
     private JLabel Layer;
     private JPanel Pannel;
+    private JTabbedPane tabbedPane1;
+    private JCheckBox jokerCheckBox;
 
     public FaderWindow() {
         add(contantPane);
         Pannel.setBackground(Color.GREEN);
     }
 
-    public void setPannelColour(boolean red){
-        if(red) {
+    public void setPannelColour(boolean red) {
+        if (red) {
             Pannel.setBackground(Color.RED);
-        }else{
+        } else {
             Pannel.setBackground(Color.GREEN);
         }
     }

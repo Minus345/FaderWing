@@ -2,7 +2,7 @@ package org.console.serial;
 
 import com.fazecast.jSerialComm.SerialPort;
 import org.console.Channel;
-import org.console.LoadContend;
+import org.console.Contend;
 import org.console.Main;
 
 import java.io.InputStream;
@@ -58,7 +58,7 @@ public class SerialLink {
                     } else {
                         Main.setLayer(Integer.parseInt(layer));
                         Main.getFaderWindow().setLayer(layer);
-                        LoadContend.setDisplayContend();
+                        Contend.setDisplayContend();
                     }
                     stringBuilder = new StringBuilder();
 

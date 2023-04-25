@@ -2,6 +2,10 @@ package org.console;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class FaderWindow extends JFrame {
     private JPanel contantPane;
@@ -17,6 +21,28 @@ public class FaderWindow extends JFrame {
     public FaderWindow() {
         add(contantPane);
         Pannel.setBackground(Color.GREEN);
+        Main.setDmxJoker(false);
+        jokerCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(e.getID() == ActionEvent.ACTION_PERFORMED
+                        ? "ACTION_PERFORMED" : e.getID());
+            }
+        });
+        jokerCheckBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                System.out.println(e.getStateChange() == ItemEvent.SELECTED ? "SELECTED" : "DESELECTED");
+                int a = e.getStateChange();
+                if (a == 1) {
+                    Main.setDmxJoker(true);
+                } else {
+                    Main.setDmxJoker(false);
+                }
+                System.out.println(a);
+            }
+        });
+
     }
 
     public void setPannelColour(boolean red) {

@@ -3,13 +3,10 @@ package org.console;
 import org.console.artnet.SendArtNet;
 import org.console.serial.SerialLink;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Properties;
 
 public class Main {
 
@@ -35,7 +32,7 @@ public class Main {
         ipAddress = args[4];
 
         //Read Config
-        LoadContend.LoadContendStart();
+        Contend.LoadContendStart();
 
         //creating GUI
         faderWindow = new FaderWindow();
@@ -73,10 +70,12 @@ public class Main {
         SerialLink.run(serialport);
 
         Thread.sleep(100);
-
+/*
         while (true) {
             UserInput.userInput();
-        }
+       }
+
+ */
     }
 
     public static ArrayList<Channel> getChannelList() {

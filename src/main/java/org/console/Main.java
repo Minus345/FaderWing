@@ -2,10 +2,14 @@ package org.console;
 
 import org.console.artnet.SendArtNet;
 import org.console.serial.SerialLink;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Properties;
 
 public class Main {
 
@@ -30,6 +34,10 @@ public class Main {
 
         ipAddress = args[4];
 
+        //Read Config
+        LoadContend.LoadContendStart();
+
+        //creating GUI
         faderWindow = new FaderWindow();
         faderWindow.setTitle("Fader Wing");
         faderWindow.pack();
@@ -38,21 +46,20 @@ public class Main {
 
         //Creating Channels
         channelCount = 20;
-        for (int i = 0; i < channelCount; i++){
-            Channel channelNew = new  Channel(i,0);
+        for (int i = 0; i < channelCount; i++) {
+            Channel channelNew = new Channel(i, 0);
             channelList.add(channelNew);
-            System.out.println("Created Channel " + i);
+            //System.out.println("Created Channel " + i);
         }
-
         channelList.sort(Comparator.comparingInt(Channel::getId));
 
         //Starting ArtNet
         System.out.println("Starting ArtNet");
         //InetAddress address = InetAddress.getByName(args[0]);
-        if(args[1].equals("broadcast")){
+        if (args[1].equals("broadcast")) {
             broadcast = true;
             System.out.println("Using broadcast");
-        }else{
+        } else {
             unicastAddress = InetAddress.getByName(args[1]);
             System.out.println("Using unicast to: " + unicastAddress.toString());
         }
@@ -67,7 +74,7 @@ public class Main {
 
         Thread.sleep(100);
 
-        while (true){
+        while (true) {
             UserInput.userInput();
         }
     }

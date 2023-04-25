@@ -2,7 +2,7 @@ package org.console.serial;
 
 import com.fazecast.jSerialComm.SerialPort;
 import org.console.Channel;
-import org.console.FaderWindow;
+import org.console.LoadContend;
 import org.console.Main;
 
 import java.io.InputStream;
@@ -58,7 +58,7 @@ public class SerialLink {
                     } else {
                         Main.setLayer(Integer.parseInt(layer));
                         Main.getFaderWindow().setLayer(layer);
-                        setDisplay();
+                        LoadContend.setDisplayContend();
                     }
                     stringBuilder = new StringBuilder();
 
@@ -67,41 +67,6 @@ public class SerialLink {
                 e.printStackTrace();
             }
             //System.out.println(build);
-        }
-    }
-
-    public static void setDisplay() {
-        switch (Main.getLayer()) {
-            case 1:
-                Main.getFaderWindow().changeLable1("channel 1");
-                Main.getFaderWindow().changeLable2("channel 2");
-                Main.getFaderWindow().changeLable3("channel 3");
-                Main.getFaderWindow().changeLable4("channel 4");
-                break;
-            case 2:
-                Main.getFaderWindow().changeLable1("channel 5");
-                Main.getFaderWindow().changeLable2("channel 6");
-                Main.getFaderWindow().changeLable3("channel 7");
-                Main.getFaderWindow().changeLable4("channel 8");
-                break;
-            case 3:
-                Main.getFaderWindow().changeLable1("channel 9");
-                Main.getFaderWindow().changeLable2("channel 10");
-                Main.getFaderWindow().changeLable3("channel 11");
-                Main.getFaderWindow().changeLable4("channel 12");
-                break;
-            case 4:
-                Main.getFaderWindow().changeLable1("channel 13");
-                Main.getFaderWindow().changeLable2("channel 14");
-                Main.getFaderWindow().changeLable3("channel 15");
-                Main.getFaderWindow().changeLable4("channel 16");
-                break;
-            case 5:
-                Main.getFaderWindow().changeLable1("channel 17");
-                Main.getFaderWindow().changeLable2("channel 18");
-                Main.getFaderWindow().changeLable3("channel 19");
-                Main.getFaderWindow().changeLable4("channel 20");
-                break;
         }
     }
 

@@ -9,12 +9,17 @@ public class Contend {
     public static void LoadContendStart() {
         prop = new Properties();
         String fileName = "app.config";
-        try (
-                FileInputStream fis = new FileInputStream(fileName)) {
-            prop.load(fis);
-        } catch (FileNotFoundException ex) {
+        File file = new File(fileName);
+        if (!file.exists()) {
             System.out.println("File not Found - Creating new one");
             createConfigFile();
+        }
+        try (
+                FileInputStream fis = new FileInputStream(fileName)) {
+                prop.load(fis);
+        } catch (FileNotFoundException ex) {
+            System.out.println("File not Found");
+            System.exit(1);
         } catch (
                 IOException ignored) {
         }

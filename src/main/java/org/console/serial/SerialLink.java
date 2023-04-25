@@ -41,7 +41,7 @@ public class SerialLink {
                     stringBuilder.deleteCharAt(stringBuilder.length() - 1);
                     String build1 = stringBuilder.toString();
                     try {
-                        changeDmxSerialInput(build1, comPorts[port]);
+                        changeDmxSerialInput(build1);
                     } catch (Exception ignored) {
                     }
                     String layer = build1.substring(build1.length() - 1);
@@ -70,7 +70,7 @@ public class SerialLink {
         }
     }
 
-    private static void changeDmxSerialInput(String s, SerialPort port) {
+    private static void changeDmxSerialInput(String s) {
         String[] split = s.split("\\|");
         //System.out.println(s);
         for (int i = 0; i < Main.getChannelCount(); i++) {

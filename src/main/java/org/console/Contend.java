@@ -16,79 +16,43 @@ public class Contend {
             System.out.println("File not Found - Creating new one");
             createConfigFile();
         } catch (
-                IOException ex) {
+                IOException ignored) {
         }
         setDisplayContend();
     }
 
     public static void setDisplayContend() {
         switch (Main.getLayer()) {
-            case 1:
+            case 1 -> {
                 Main.getFaderWindow().changeLable1(prop.getProperty("gui.channel.1"));
                 Main.getFaderWindow().changeLable2(prop.getProperty("gui.channel.2"));
                 Main.getFaderWindow().changeLable3(prop.getProperty("gui.channel.3"));
                 Main.getFaderWindow().changeLable4(prop.getProperty("gui.channel.4"));
-
-                break;
-            case 2:
+            }
+            case 2 -> {
                 Main.getFaderWindow().changeLable1(prop.getProperty("gui.channel.5"));
                 Main.getFaderWindow().changeLable2(prop.getProperty("gui.channel.6"));
                 Main.getFaderWindow().changeLable3(prop.getProperty("gui.channel.7"));
                 Main.getFaderWindow().changeLable4(prop.getProperty("gui.channel.8"));
-                break;
-            case 3:
+            }
+            case 3 -> {
                 Main.getFaderWindow().changeLable1(prop.getProperty("gui.channel.9"));
                 Main.getFaderWindow().changeLable2(prop.getProperty("gui.channel.10"));
                 Main.getFaderWindow().changeLable3(prop.getProperty("gui.channel.11"));
                 Main.getFaderWindow().changeLable4(prop.getProperty("gui.channel.12"));
-                break;
-            case 4:
+            }
+            case 4 -> {
                 Main.getFaderWindow().changeLable1(prop.getProperty("gui.channel.13"));
                 Main.getFaderWindow().changeLable2(prop.getProperty("gui.channel.14"));
                 Main.getFaderWindow().changeLable3(prop.getProperty("gui.channel.15"));
                 Main.getFaderWindow().changeLable4(prop.getProperty("gui.channel.16"));
-                break;
-            case 5:
+            }
+            case 5 -> {
                 Main.getFaderWindow().changeLable1(prop.getProperty("gui.channel.17"));
                 Main.getFaderWindow().changeLable2(prop.getProperty("gui.channel.18"));
                 Main.getFaderWindow().changeLable3(prop.getProperty("gui.channel.19"));
                 Main.getFaderWindow().changeLable4(prop.getProperty("gui.channel.20"));
-                break;
-        }
-    }
-
-    public static void setDisplayDefault() {
-        switch (Main.getLayer()) {
-            case 1:
-                Main.getFaderWindow().changeLable1("channel 1");
-                Main.getFaderWindow().changeLable2("channel 2");
-                Main.getFaderWindow().changeLable3("channel 3");
-                Main.getFaderWindow().changeLable4("channel 4");
-                break;
-            case 2:
-                Main.getFaderWindow().changeLable1("channel 5");
-                Main.getFaderWindow().changeLable2("channel 6");
-                Main.getFaderWindow().changeLable3("channel 7");
-                Main.getFaderWindow().changeLable4("channel 8");
-                break;
-            case 3:
-                Main.getFaderWindow().changeLable1("channel 9");
-                Main.getFaderWindow().changeLable2("channel 10");
-                Main.getFaderWindow().changeLable3("channel 11");
-                Main.getFaderWindow().changeLable4("channel 12");
-                break;
-            case 4:
-                Main.getFaderWindow().changeLable1("channel 13");
-                Main.getFaderWindow().changeLable2("channel 14");
-                Main.getFaderWindow().changeLable3("channel 15");
-                Main.getFaderWindow().changeLable4("channel 16");
-                break;
-            case 5:
-                Main.getFaderWindow().changeLable1("channel 17");
-                Main.getFaderWindow().changeLable2("channel 18");
-                Main.getFaderWindow().changeLable3("channel 19");
-                Main.getFaderWindow().changeLable4("channel 20");
-                break;
+            }
         }
     }
 

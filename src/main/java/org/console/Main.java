@@ -10,7 +10,7 @@ import java.util.Comparator;
 
 public class Main {
 
-    private static ArrayList<Channel> channelList = new ArrayList<>();
+    private static final ArrayList<Channel> channelList = new ArrayList<>();
     private static int channelCount;
     private static int subnet;
     private static int universe;
@@ -27,7 +27,6 @@ public class Main {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         System.out.println("Starting!");
-        //dmxJoker = true;
 
         ipAddress = args[4];
 
@@ -126,10 +125,6 @@ public class Main {
         Main.layer = layer;
     }
 
-    public static boolean isChangingLayer() {
-        return changingLayer;
-    }
-
     public static void setChangingLayer(boolean changingLayer) {
         Main.changingLayer = changingLayer;
     }
@@ -138,7 +133,4 @@ public class Main {
         return faderWindow;
     }
 
-    public static void setFaderWindow(FaderWindow faderWindow) {
-        Main.faderWindow = faderWindow;
-    }
 }

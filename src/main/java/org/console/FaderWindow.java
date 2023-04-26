@@ -17,6 +17,7 @@ public class FaderWindow extends JFrame {
 
     public FaderWindow() {
         add(contantPane);
+        setBackground(Color.green);
         Pannel.setBackground(Color.GREEN);
         Main.setDmxJoker(false);
         jokerCheckBox.addActionListener(e -> System.out.println(e.getID() == ActionEvent.ACTION_PERFORMED ? "ACTION_PERFORMED" : e.getID()));

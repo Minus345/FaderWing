@@ -1,10 +1,12 @@
 package org.console;
 
+import org.apache.commons.cli.*;
 import org.console.artnet.SendArtNet;
 import org.console.serial.SerialLink;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -28,10 +30,15 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         System.out.println("Starting!");
 
-        ipAddress = args[4];
+        //Read Command Line
+        commandLineParameters(args);
 
         //Read Config
         Contend.LoadContendStart();
+        if(!broadcast && unicastAddress == null){
+            System.out.println("Please set Uni-cast or Broad-cast");
+            System.exit(101);
+        }
 
         //creating GUI
         faderWindow = new FaderWindow();
@@ -52,20 +59,10 @@ public class Main {
         //Starting ArtNet
         System.out.println("Starting ArtNet");
         //InetAddress address = InetAddress.getByName(args[0]);
-        if (args[1].equals("broadcast")) {
-            broadcast = true;
-            System.out.println("Using broadcast");
-        } else {
-            unicastAddress = InetAddress.getByName(args[1]);
-            System.out.println("Using unicast to: " + unicastAddress.toString());
-        }
-        subnet = Integer.parseInt(args[2]);
-        universe = Integer.parseInt(args[3]);
         System.out.println("Sending data to subnet: " + subnet + " universe: " + universe);
-        SendArtNet.tick(); //192.168.178.131
+        SendArtNet.tick();
 
         //Starting Serial Com
-        serialport = Integer.parseInt(args[0]);
         SerialLink.run(serialport);
 
         Thread.sleep(100);
@@ -75,6 +72,65 @@ public class Main {
        }
 
  */
+    }
+
+    private static void commandLineParameters(String[] args) {
+        var options = new Options()
+                .addOption("b", "broadcast", false, "broadcast")
+                .addOption(Option.builder("u")
+                        .longOpt("uni-cast")
+                        .desc("uni-cast ArtNet Destination IP")
+                        .hasArg(true)
+                        .build())
+                .addOption(Option.builder("ip")
+                        .longOpt("ipaddr")
+                        .desc("ArtNet IP")
+                        .hasArg(true)
+                        .build())
+                .addOption(Option.builder("s")
+                        .longOpt("serialPort")
+                        .desc("Serial Port (int)")
+                        .hasArg(true)
+                        .build())
+                .addOption(Option.builder("su")
+                        .longOpt("subnet")
+                        .hasArg(true)
+                        .build())
+                .addOption(Option.builder("u")
+                        .longOpt("subnet")
+                        .hasArg(true)
+                        .build());
+
+        CommandLineParser parser = new DefaultParser();
+        CommandLine line;
+        try {
+            line = parser.parse(options, args);
+            if (line.hasOption("b")) {
+                broadcast = true;
+                System.out.println("Using broadcast");
+            }
+            if (line.hasOption("u")) {
+                unicastAddress = InetAddress.getByName(line.getOptionValue("u"));
+                System.out.println("Using unicast to: " + unicastAddress.toString());
+            }
+            if (line.hasOption("ip")) {
+                ipAddress = line.getOptionValue("ip");
+            }
+            if (line.hasOption("s")) {
+                serialport = Integer.parseInt(line.getOptionValue("s"));
+            }
+            if (line.hasOption("su")) {
+                subnet = Integer.parseInt(line.getOptionValue("su"));
+            }
+            if (line.hasOption("u")) {
+                universe = Integer.parseInt(line.getOptionValue("u"));
+            }
+        } catch (ParseException exp) {
+            // oops, something went wrong
+            System.err.println("Parsing failed.  Reason: " + exp.getMessage());
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static ArrayList<Channel> getChannelList() {

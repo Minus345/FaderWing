@@ -92,12 +92,12 @@ public class Main {
                         .desc("Serial Port (int)")
                         .hasArg(true)
                         .build())
-                .addOption(Option.builder("su")
+                .addOption(Option.builder("as")
                         .longOpt("subnet")
                         .hasArg(true)
                         .build())
-                .addOption(Option.builder("u")
-                        .longOpt("subnet")
+                .addOption(Option.builder("au")
+                        .longOpt("universe")
                         .hasArg(true)
                         .build());
 
@@ -120,10 +120,10 @@ public class Main {
                 serialport = Integer.parseInt(line.getOptionValue("s"));
             }
             if (line.hasOption("su")) {
-                subnet = Integer.parseInt(line.getOptionValue("su"));
+                subnet = Integer.parseInt(line.getOptionValue("as"));
             }
             if (line.hasOption("u")) {
-                universe = Integer.parseInt(line.getOptionValue("u"));
+                universe = Integer.parseInt(line.getOptionValue("au"));
             }
         } catch (ParseException exp) {
             // oops, something went wrong

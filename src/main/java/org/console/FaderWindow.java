@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 
 public class FaderWindow extends JFrame {
-    private JPanel contantPane;
+    private JPanel contandPane;
     private JLabel Lable1;
     private JLabel Label2;
     private JLabel Lable3;
@@ -16,7 +16,7 @@ public class FaderWindow extends JFrame {
     private JCheckBox jokerCheckBox;
 
     public FaderWindow() {
-        add(contantPane);
+        add(contandPane);
         setBackground(Color.green);
         Pannel.setBackground(Color.GREEN);
         Main.setDmxJoker(false);

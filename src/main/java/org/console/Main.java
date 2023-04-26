@@ -77,6 +77,7 @@ public class Main {
     private static void commandLineParameters(String[] args) {
         var options = new Options()
                 .addOption("b", "broadcast", false, "broadcast")
+                .addOption("h", "help", false, "Help Message")
                 .addOption(Option.builder("u")
                         .longOpt("uni-cast")
                         .desc("uni-cast ArtNet Destination IP")
@@ -105,6 +106,11 @@ public class Main {
         CommandLine line;
         try {
             line = parser.parse(options, args);
+            if (line.hasOption("h")) {
+                HelpFormatter formatter = new HelpFormatter();
+                formatter.printHelp("Command:", options);
+                System.exit(0);
+            }
             if (line.hasOption("b")) {
                 broadcast = true;
                 System.out.println("Using broadcast");
